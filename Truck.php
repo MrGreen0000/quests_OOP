@@ -4,9 +4,6 @@ require_once 'Vehicle.php';
 
 class Truck extends Vehicle
 {
-    private int $storageCapacity;
-
-    private int $loading = 0;
 
     public const ALLOWED_ENERGIES = [
 
@@ -15,73 +12,74 @@ class Truck extends Vehicle
         'electric',
 
     ];
+    private int $storageCapacity;
+
+    private int $loading = 0;
+
+
     private string $energy;
 
     private int $energyLevel;
 
 
-    public function __construct(string $color, int $nbSeats, string $energy)
+    public function __construct(string $color, int $nbSeats, string $energy, int $storageCapacity)
 
     {
 
-    parent::__construct($color, $nbSeats);
+        parent::__construct($color, $nbSeats);
 
-    $this->energy = $energy;
-
+        $this->setEnergy($energy);
+        $this->storageCapacity = $storageCapacity;
     }
-
 
     public function getEnergy(): string
 
     {
 
         return $this->energy;
-
     }
 
 
-    public function setEnergy(string $energy) : Truck
+    public function setEnergy(string $energy): Truck
 
     {
-    
+
         if (in_array($energy, self::ALLOWED_ENERGIES)) {
-    
+
             $this->energy = $energy;
-    
         }
-    
+
         return $this;
-    
     }
 
-   
-    public function getEnergyLevel(): int
+
+    public function getEnergyLevel()
 
     {
 
-        return $this->energyLevel;
+         $this->energyLevel = 0;
 
+        if($this->energyLevel  > 0){
+            echo "full";
+        }else{
+            echo  "in filling";
+        }
     }
 
 
     public function setEnergyLevel(int $energyLevel): void
 
     {
-        if($energyLevel >= 0){
 
             $this->energyLevel = $energyLevel;
-        }
-
      
-
+        
     }
-
     public function getLoading(): int
 
     {
 
         return $this->loading;
-
     }
 
 
@@ -90,7 +88,6 @@ class Truck extends Vehicle
     {
 
         $this->loading = $loading;
-
     }
 
     public function getStorageCapacity(): int
@@ -98,7 +95,6 @@ class Truck extends Vehicle
     {
 
         return $this->storageCapacity;
-
     }
 
 
@@ -107,9 +103,35 @@ class Truck extends Vehicle
     {
 
         $this->storageCapacity = $storageCapacity;;
-
     }
 
+    public function forward(): string
+
+    {
+
+        $this->currentSpeed = 20;
 
 
+        return "Go !";
+    }
+    public function brake(): string
+
+    {
+
+        $sentence = "";
+
+        while ($this->currentSpeed > 0) {
+
+            $this->currentSpeed--;
+
+            $sentence .= "Brake !!!";
+        }
+
+        $sentence .= "I'm stopped !";
+
+        return $sentence;
+    }
+
+    
+    
 }

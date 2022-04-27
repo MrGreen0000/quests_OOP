@@ -1,35 +1,45 @@
 <?php
 
 
-
 require_once 'Bicycle.php';
+require_once 'Car.php';
+require_once 'Truck.php';
 
 $bicycle = new Bicycle('blue', 1);
 
 echo $bicycle->forward();
-
+echo '<br>';
+echo $bicycle->brake();
+echo '<br><br>';
 var_dump($bicycle);
+
 echo '<br><br>';
 
-require_once ('Car.php');
 $car = new Car('green', 4, 'electric');
 
 echo $car->forward();
-
-var_dump($car);
-var_dump(Car::ALLOWED_ENERGIES);
+echo '<br>';
+echo $car->brake();
 echo '<br><br>';
 
-require_once ('Truck.php');
-Use Truck as Tk;
-$truck = new Tk('Blue', 4, 'diesel fuel');
+var_dump($car);
 
-$truck->setStorageCapacity(34);
+echo '<br><br>';
 
+var_dump(Car::ALLOWED_ENERGIES);
 
+echo '<br><br>';
 
+$truck = new truck ('red',4, 'electric', 900 ); 
+
+echo $truck->forward();
+echo '<br>';
+echo $truck->brake();
+echo '<br><br>';
 var_dump($truck);
-var_dump(Truck::ALLOWED_ENERGIES);
+echo '<br><br>';
+echo $truck->getEnergyLevel();
+
 
 
 
